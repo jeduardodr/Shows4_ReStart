@@ -1,5 +1,5 @@
-﻿
-namespace Shows4.App.Pages.Entities.Countries;
+﻿namespace Shows4.App.Pages.Entities.Countries;
+[Authorize]
 
 public class DetailsModel : PageModel
 {

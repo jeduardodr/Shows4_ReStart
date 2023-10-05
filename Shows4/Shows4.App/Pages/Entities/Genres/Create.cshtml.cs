@@ -1,12 +1,13 @@
-﻿namespace Shows4.App.Pages.Entities.Countries;
+﻿namespace Shows4.App.Pages.Entities.Genres;
 [Authorize]
+
 public class CreateModel : PageModel
 {
-    private readonly Shows4.App.Data.ApplicationDbContext _context;
+    private readonly GenresRepository _genresRepository;
 
-    public CreateModel(Shows4.App.Data.ApplicationDbContext context)
+    public CreateModel (GenresRepository genresRepository)
     {
-        _context = context;
+       _genresRepository = genresRepository;
     }
 
     public IActionResult OnGet()
@@ -15,7 +16,7 @@ public class CreateModel : PageModel
     }
 
     [BindProperty]
-    public Country Country { get; set; }
+    public Genre Genre { get; set; }
     
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
@@ -25,9 +26,7 @@ public class CreateModel : PageModel
         {
             return Page();
         }
-
-        _context.Countries.Add(Country);
-        await _context.SaveChangesAsync();
+      await _genresRepository.AddGenreAsync(Genre);
 
         return RedirectToPage("./Index");
     }

@@ -1,30 +1,30 @@
-﻿namespace Shows4.App.Pages.Entities.Countries;
+﻿namespace Shows4.App.Pages.Entities.Genres;
 [Authorize]
+
 public class EditModel : PageModel
 {
-    private readonly CountryRepository _countryRepository;
-
-    public EditModel(CountryRepository countryRepository)
+    private readonly GenresRepository _genresRepository;
+    public EditModel(GenresRepository genresRepository)
     {
-        _countryRepository  = countryRepository;
+        _genresRepository   = genresRepository;
     }
 
     [BindProperty]
-    public Country Country { get; set; } = default!;
+    public Genre Genre { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id == null)
+        if (id == null )
         {
             return NotFound();
         }
 
-        var country =  await _countryRepository.GetByIdAsync(id.Value);
-        if (country == null)
+        var genre =  await _genresRepository.GetByIdAsync(id.Value);
+        if (genre == null)
         {
             return NotFound();
         }
-        Country = country;
+        Genre = genre;
         return Page();
     }
 
@@ -36,10 +36,11 @@ public class EditModel : PageModel
         {
             return Page();
         }
-
-       await _countryRepository.UpdateAsync(Country);
+        await _genresRepository.UpdateAsync(Genre);
+       
 
         return RedirectToPage("./Index");
     }
 
+   
 }

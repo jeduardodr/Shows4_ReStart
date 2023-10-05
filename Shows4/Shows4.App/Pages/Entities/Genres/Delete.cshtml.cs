@@ -1,34 +1,34 @@
-﻿namespace Shows4.App.Pages.Entities.Countries;
+﻿namespace Shows4.App.Pages.Entities.Genres;
 [Authorize]
 
 public class DeleteModel : PageModel
 {
-    private readonly CountryRepository _countryRepository;
+    private readonly GenresRepository _genresRepository;
 
-    public DeleteModel(CountryRepository countryRepository)
+    public DeleteModel(GenresRepository genresRepository)
     {
-       _countryRepository = countryRepository;
+       _genresRepository = genresRepository;
     }
 
     [BindProperty]
-  public Country Country { get; set; }
+  public Genre Genre { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id == null )
+        if (id == null)
         {
             return NotFound();
         }
 
-        var country = await _countryRepository.GetByIdAsync(id.Value);
+        var genre = await _genresRepository.GetByIdAsync(id.Value);
 
-        if (country == null)
+        if (genre == null)
         {
             return NotFound();
         }
         else 
         {
-            Country = country;
+            Genre = genre;
         }
         return Page();
     }
@@ -39,7 +39,8 @@ public class DeleteModel : PageModel
         {
             return NotFound();
         }
-        await _countryRepository.DeleteByIdAsync(id.Value);
+        await _genresRepository.DeleteByIdAsync(id.Value);
+
         return RedirectToPage("./Index");
     }
 }
