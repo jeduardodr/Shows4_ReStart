@@ -15,6 +15,14 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 
+
+
+// Configuração de serviços criados 
+builder.Services.AddScoped<CountryRepository>();
+//builder.Services.AddScoped<CityRepository>();
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

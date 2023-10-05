@@ -1,0 +1,95 @@
+Crar as Classes
+
+
+
+|_| - Criar Classe WriterSerie (Ligacao)
+-----
+|_| - Criar Classe CastEpisode (Ligacao)
+-----
+|_| - Criar Classe DetalhesAluguer (Ligacao)
+	Avaliaçao do utilizador
+	Comentarios do utilizador 
+		Veriricar que o utilizador so pode avaliar e comentare uma vez uma determinada serie
+-----
+|_| - Editar Serie -> Adicionar preço
+-----
+|_| - Editar Utilizador-> Adicionar Cartao Pagamento
+-----___________________________________________
+|_| -  Pagina Genero
+	|_| -  Criar Genero      < ---- SO Administrador --- >
+	|_| -  Editar Genero     < ---- SO Administrador --- >
+	|_| -  Eliminar Genero   < ---- SO Administrador --- >
+-----___________________________________________
+|_| -  Pagina Pais
+	|_| -  Criar Pais        < ---- SO Administrador --- >
+	|_| -  Editar Pais       < ---- SO Administrador --- >
+	|_| -  Eliminar Pais     < ---- SO Administrador --- >
+-----___________________________________________
+|_| -  Pagina Serie 
+	|_| -  Criar Serie       < ---- SO Administrador --- >
+	|_| -  Editar Serie      < ---- SO Administrador --- >
+	|_| -  Eliminar Serie    < ---- SO Administrador --- >
+-----___________________________________________
+|_| - Pagina Temporada
+	|_| -  Criar Temporada   < ---- SO Administrador --- >
+	|_| -  Editar Temporada  < ---- SO Administrador --- >
+	|_| -  Eliminar Temporada< ---- SO Administrador --- >
+-----___________________________________________
+|_| - Pagina Episodio
+	|_| -  Criar Episodio    < ---- SO Administrador --- >
+	|_| -  Editar Episodio   < ---- SO Administrador --- >
+	|_| -  Eliminar Episodio < ---- SO Administrador --- > 
+-----___________________________________________
+|_| - Pagina Ator
+	|_| -  Criar Ator        < ---- SO Administrador --- >
+	|_| -  Editar Ator       < ---- SO Administrador --- >
+	 -  Eliminar Ator <----- Proibido Eliminar Ator
+-----___________________________________________
+|_| - Pagina Escritor
+	|_| -  Criar Escritor    < ---- SO Administrador --- >
+	|_| -  Editar Escritor   < ---- SO Administrador --- >
+	 -  Eliminar escritor <----- Proibido elimnar Escritor
+-----___________________________________________
+|_| -Criar uma pagina onde o Utilizador pode Carregadr o Saldo da Conta
+-----___________________________________________
+|_| - Todas as Pagina Criadas tem de ter o  [Authorize] para estarem todas logadas
+-----___________________________________________
+|_| - Pagina de Estatisticas
+	|_| - Ver Avaliaçoes de Filmes/Series
+	|_| - Historico de filmes/serie Alugados
+-----___________________________________________
+
+--------------------------------------VERSAO UTILIZADOR
+|_| - Na pagina serie, 
+	|_| -  procurar por nome
+-----___________________________________________
+|_| - Conseguir ver as series alugadas e respetiva data
+-----___________________________________________
+|_| - Pagina que mostre 
+	|_| - Top de Serie por Pais
+	|_| - Top de Serie por Genero
+	|_| - Top de serie Por Avaliaçao
+-----___________________________________________
+|_| - pagina onde colocar o nome ATOR a aparece
+	|_| - Episodios onde aparece
+	|_| - Series onde aparece
+-----___________________________________________
+|_| - 
+-----___________________________________________
+|_| - 
+-----___________________________________________
+|_| - 
+-----___________________________________________
+|_| - 
+-----___________________________________________
+|_| - 
+-----___________________________________________
+|_| - 
+-----___________________________________________
+|_| - 
+-----___________________________________________
+|_| - 
+-----___________________________________________
+|_| - 
+-----___________________________________________
+|_| - 
