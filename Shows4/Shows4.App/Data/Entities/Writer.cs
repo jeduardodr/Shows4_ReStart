@@ -8,5 +8,11 @@
         public string Gender { get; set; }
         public int CountryId { get; set; }
         public Country Country { get; set; }
+
+        internal object Include(Func<object, object> value)
+        {
+            throw new NotImplementedException();
+        }
+        //Talvez criar um genero em DataBase masculino, femenino, etc
     }
 }

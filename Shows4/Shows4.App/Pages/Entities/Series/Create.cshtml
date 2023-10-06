@@ -1,0 +1,61 @@
+﻿@page
+@model Shows4.App.Pages.Entities.Series.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Serie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Serie.Title" class="control-label"></label>
+                <input asp-for="Serie.Title" class="form-control" />
+                <span asp-validation-for="Serie.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Serie.Description" class="control-label"></label>
+                <input asp-for="Serie.Description" class="form-control" />
+                <span asp-validation-for="Serie.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Serie.Rating" class="control-label"></label>
+                <input asp-for="Serie.Rating" class="form-control" />
+                <span asp-validation-for="Serie.Rating" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Serie.RatingGlobal" class="control-label"></label>
+                <input asp-for="Serie.RatingGlobal" class="form-control" />
+                <span asp-validation-for="Serie.RatingGlobal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Serie.CountryId" class="control-label"></label>
+                <select asp-for="Serie.CountryId" class ="form-control" asp-items="ViewBag.CountryId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Serie.SeasonId" class="control-label"></label>
+                <select asp-for="Serie.SeasonId" class ="form-control" asp-items="ViewBag.SeasonId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Serie.GenreId" class="control-label"></label>
+                <select asp-for="Serie.GenreId" class ="form-control" asp-items="ViewBag.GenreId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

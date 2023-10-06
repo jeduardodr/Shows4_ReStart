@@ -7,6 +7,7 @@
         public double Rating { get; set; }
         public double RatingGlobal { get; set; }
         public int EpisodeId { get; set; }
-        public Episode Episode { get; set; }
+        public Episode Episode { get; set; } 
+       
     }
 }

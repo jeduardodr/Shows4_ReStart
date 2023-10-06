@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
-using Shows4.App.Data;
-
+﻿using Shows4.App.Data;
 namespace Shows4.App.Repositories;
 
 public class GenresRepository
 {
-
     private readonly ApplicationDbContext _ctx;
     private readonly ILogger<GenresRepository> _logger; 
 
@@ -70,7 +67,4 @@ public class GenresRepository
     {
         return await _ctx.Genres.ToListAsync();
     }
-
-
-
 }

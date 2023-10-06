@@ -19,7 +19,7 @@ builder.Services.AddRazorPages();
 
 // Configuração de serviços criados 
 builder.Services.AddScoped<CountryRepository>();
-//builder.Services.AddScoped<CityRepository>();
+builder.Services.AddScoped<WriterRepository>();
 builder.Services.AddScoped<GenresRepository>();
 
 

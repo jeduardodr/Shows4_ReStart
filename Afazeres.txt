@@ -50,7 +50,7 @@ Crar as Classes
 	|_| -  Editar Escritor   < ---- SO Administrador --- >
 	 -  Eliminar escritor <----- Proibido elimnar Escritor
 -----___________________________________________
-|_| -Criar uma pagina onde o Utilizador pode Carregadr o Saldo da Conta
+|_| -Criar uma pagina onde o Utilizador  
 -----___________________________________________
 |_| - Todas as Pagina Criadas tem de ter o  [Authorize] para estarem todas logadas
 -----___________________________________________

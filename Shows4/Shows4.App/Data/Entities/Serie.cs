@@ -13,5 +13,8 @@
         public Season Season { get; set; }
         public int GenreId { get; set; }
         public Genre Genre { get; set; }
+        //Data de lançamento ==public string RealesaYear 
+        //Imagem == public string Image 
+        //preço
     }
 }
