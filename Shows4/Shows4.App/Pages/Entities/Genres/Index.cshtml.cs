@@ -13,8 +13,6 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        
             Genres = await _genresRepository.GetAllAsync();
-        
     }
 }

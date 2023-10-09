@@ -7,7 +7,6 @@ namespace Shows4.App.Data.Entities
         public int Id { get; set; }
         [MaxLength(15)]
         public string Name { get; set; }
-      
-       
+
     }
 }

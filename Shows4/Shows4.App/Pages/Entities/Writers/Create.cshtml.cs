@@ -1,35 +1,32 @@
 ﻿namespace Shows4.App.Pages.Entities.Writers;
-[Authorize]
+[Authorize(Roles = "Admin")]
 
 public class CreateModel : PageModel
 {
-    private readonly Shows4.App.Data.ApplicationDbContext _context;
+    private readonly WriterRepository _writerRepository;
 
-    public CreateModel(Shows4.App.Data.ApplicationDbContext context)
+    public CreateModel(WriterRepository writerRepository)
     {
-        _context = context;
-    }
-
-    public IActionResult OnGet()
-    {
-    ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name");
-        return Page();
+        _writerRepository = writerRepository;
     }
 
     [BindProperty]
     public Writer Writer { get; set; }
-    
+    public IActionResult OnGet()
+    {
+        ViewData["CountryId"] = _writerRepository.GetCountries();
+        return Page();
+    }
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-      if (!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        _context.Writers.Add(Writer);
-        await _context.SaveChangesAsync();
+        await _writerRepository.AddWriterAsync(Writer);
 
         return RedirectToPage("./Index");
     }

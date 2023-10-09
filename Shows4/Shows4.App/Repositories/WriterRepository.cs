@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 using Shows4.App.Data;
 using Shows4.App.Data.Entities;
 using Shows4.App.Models;
@@ -29,6 +30,21 @@ public class WriterRepository
                            }).FirstOrDefaultAsync();
         return model;
     }
+    //Get Countries 
+    public SelectList GetCountries()
+    {
+        return new SelectList(_ctx.Countries, "Id", "Name");
+    }
+    // ADD
+    public async Task AddWriterAsync(Writer writer)
+    {
+        _ctx.Writers.Add(writer);
+        await _ctx.SaveChangesAsync();
+    }
 
-    
+    //get
+    public async Task<List<Country>> GetAllAsync()
+    {
+        return await _ctx.Countries.ToListAsync();
+    }
 }
