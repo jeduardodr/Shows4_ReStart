@@ -1,21 +1,16 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Shows4.App.Data;
-using Shows4.App.Data.Entities;
 using Shows4.App.Models;
-using System.Runtime.InteropServices;
 
 namespace Shows4.App.Repositories;
 
 public class WriterRepository
 {
     private readonly ApplicationDbContext _ctx;
-    private readonly ILogger<WriterRepository> _logger;
-
-    public WriterRepository(ApplicationDbContext ctx, ILogger<WriterRepository> logger )
+       public WriterRepository(ApplicationDbContext ctx, ILogger<WriterRepository> logger )
     {
         _ctx = ctx;
-        _logger = logger;
+       
     }
     public async Task<WriterModel> GetWriteModelAsync(int writeId)
     {
@@ -41,10 +36,62 @@ public class WriterRepository
         _ctx.Writers.Add(writer);
         await _ctx.SaveChangesAsync();
     }
-
     //get
     public async Task<List<Country>> GetAllAsync()
     {
         return await _ctx.Countries.ToListAsync();
+    }
+    public async Task<IList<Writer>> GetWritersAsync()
+    {
+        if (_ctx.Writers != null)
+        {
+            return await _ctx.Writers.Include(w => w.Country).ToListAsync();
+        }
+
+        return new List<Writer>();
+    }
+    //Delete
+    public async Task<Writer> FindWriterById(int? id)
+    {
+        if (id == null)
+        {
+            return null;
+        }
+        return await _ctx.Writers.FindAsync(id);
+    }
+    public async Task RemoveWriter(Writer writer)
+    {
+        _ctx.Writers.Remove(writer);
+        await _ctx.SaveChangesAsync();
+    }
+    //Details
+    public async Task<(Writer writer, IList<Writer> writers)> GetWriterAndListAsync(int? id)
+    {
+        if (id == null)
+        {
+            return (null, null);
+        }
+        var writers = await _ctx.Writers.Include(w => w.Country).ToListAsync();
+        var writer = await _ctx.Writers.FirstOrDefaultAsync(m => m.Id == id);
+        return (writer, writers);
+    }
+    //Edit
+  
+    public async Task<Writer> GetWriterAsync(int id)
+    {
+        if ( _ctx.Writers == null)
+        {
+            return null;
+        }
+        return await _ctx.Writers.FirstOrDefaultAsync(m => m.Id == id);
+    }
+    public async Task UpdateWriterAsync(Writer writer)
+    {
+        _ctx.Attach(writer).State = EntityState.Modified;
+        await _ctx.SaveChangesAsync();
+    }
+    public bool WriterExists(int id)
+    {
+        return _ctx.Writers.Any(e => e.Id == id);
     }
 }

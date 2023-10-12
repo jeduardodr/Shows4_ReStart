@@ -2,50 +2,38 @@
 [Authorize]
 public class DeleteModel : PageModel
 {
-    private readonly Shows4.App.Data.ApplicationDbContext _context;
+    private readonly WriterRepository _writerRepository;
 
-    public DeleteModel(Shows4.App.Data.ApplicationDbContext context)
+    public DeleteModel(WriterRepository writerRepository)
     {
-        _context = context;
+        _writerRepository = writerRepository;
     }
 
     [BindProperty]
-  public Writer Writer { get; set; }
-
+    public Writer Writer { get; set; }
+    public IList<Writer> LWriter { get; set; } = default!;
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id == null || _context.Writers == null)
+        Writer = await _writerRepository.FindWriterById(id);
+        var (writer, writers) = await _writerRepository.GetWriterAndListAsync(id);
+        if (Writer == null)
         {
             return NotFound();
         }
-
-        var writer = await _context.Writers.FirstOrDefaultAsync(m => m.Id == id);
-
-        if (writer == null)
-        {
-            return NotFound();
-        }
-        else 
-        {
-            Writer = writer;
-        }
+        LWriter = writers; // Devolve o Pais que vai bucar pelo ID
         return Page();
     }
 
     public async Task<IActionResult> OnPostAsync(int? id)
     {
-        if (id == null || _context.Writers == null)
+        Writer = await _writerRepository.FindWriterById(id);
+
+        if (Writer == null)
         {
             return NotFound();
         }
-        var writer = await _context.Writers.FindAsync(id);
 
-        if (writer != null)
-        {
-            Writer = writer;
-            _context.Writers.Remove(Writer);
-            await _context.SaveChangesAsync();
-        }
+        await _writerRepository.RemoveWriter(Writer);
 
         return RedirectToPage("./Index");
     }

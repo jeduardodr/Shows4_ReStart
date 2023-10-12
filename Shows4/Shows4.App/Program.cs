@@ -22,6 +22,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<CountryRepository>();
 builder.Services.AddScoped<WriterRepository>();
 builder.Services.AddScoped<GenresRepository>();
+builder.Services.AddScoped<CastRepository>();
 
 
 

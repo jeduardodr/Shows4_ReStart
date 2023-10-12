@@ -3,31 +3,26 @@
 
 public class DetailsModel : PageModel
 {
-    private readonly Shows4.App.Data.ApplicationDbContext _context;
+    private readonly CastRepository _castRepository; 
 
-    public DetailsModel(Shows4.App.Data.ApplicationDbContext context)
+    public DetailsModel(CastRepository castRepository)
     {
-        _context = context;
+        _castRepository = castRepository;
     }
 
   public Cast Cast { get; set; }
+   public IList<Cast> LCast { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id == null || _context.Casts == null)
-        {
-            return NotFound();
-        }
+        var (cast, casts) = await _castRepository.GetCastAndListAsync(id);
 
-        var cast = await _context.Casts.FirstOrDefaultAsync(m => m.Id == id);
-        if (cast == null)
+        if (cast == null || casts == null)
         {
             return NotFound();
         }
-        else 
-        {
-            Cast = cast;
-        }
+        Cast = cast;
+        LCast = casts;
         return Page();
     }
 }

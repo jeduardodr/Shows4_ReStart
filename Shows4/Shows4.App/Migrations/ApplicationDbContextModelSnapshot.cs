@@ -22,6 +22,21 @@ namespace Shows4.App.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CastEpisode", b =>
+                {
+                    b.Property<int>("CastsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EpisodesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CastsId", "EpisodesId");
+
+                    b.HasIndex("EpisodesId");
+
+                    b.ToTable("CastEpisode");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -254,6 +269,7 @@ namespace Shows4.App.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -295,16 +311,24 @@ namespace Shows4.App.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
                     b.Property<double>("Rating")
                         .HasColumnType("float");
 
                     b.Property<double>("RatingGlobal")
                         .HasColumnType("float");
 
+                    b.Property<int?>("SeasonId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SeasonId");
 
                     b.ToTable("Episodes");
                 });
@@ -326,6 +350,70 @@ namespace Shows4.App.Data.Migrations
                     b.ToTable("Genres");
                 });
 
+            modelBuilder.Entity("Shows4.App.Data.Entities.Raking", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClienteId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Estrelas")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SerieId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("SerieId");
+
+                    b.ToTable("Rakings");
+                });
+
+            modelBuilder.Entity("Shows4.App.Data.Entities.RentDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("PrecoPago")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("RentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SerieId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("SerieId");
+
+                    b.ToTable("RentDetails");
+                });
+
             modelBuilder.Entity("Shows4.App.Data.Entities.Season", b =>
                 {
                     b.Property<int>("Id")
@@ -340,15 +428,23 @@ namespace Shows4.App.Data.Migrations
                     b.Property<int>("EpisodeId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
                     b.Property<double>("Rating")
                         .HasColumnType("float");
 
                     b.Property<double>("RatingGlobal")
                         .HasColumnType("float");
 
+                    b.Property<int?>("SerieId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EpisodeId");
+
+                    b.HasIndex("SerieId");
 
                     b.ToTable("Seasons");
                 });
@@ -369,6 +465,12 @@ namespace Shows4.App.Data.Migrations
 
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<double>("Rating")
                         .HasColumnType("float");
@@ -411,6 +513,7 @@ namespace Shows4.App.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -418,6 +521,21 @@ namespace Shows4.App.Data.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Writers");
+                });
+
+            modelBuilder.Entity("CastEpisode", b =>
+                {
+                    b.HasOne("Shows4.App.Data.Entities.Cast", null)
+                        .WithMany()
+                        .HasForeignKey("CastsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Shows4.App.Data.Entities.Episode", null)
+                        .WithMany()
+                        .HasForeignKey("EpisodesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -482,6 +600,47 @@ namespace Shows4.App.Data.Migrations
                     b.Navigation("Country");
                 });
 
+            modelBuilder.Entity("Shows4.App.Data.Entities.Episode", b =>
+                {
+                    b.HasOne("Shows4.App.Data.Entities.Season", null)
+                        .WithMany("Episodes")
+                        .HasForeignKey("SeasonId");
+                });
+
+            modelBuilder.Entity("Shows4.App.Data.Entities.Raking", b =>
+                {
+                    b.HasOne("Shows4.App.Data.Entities.ApplicationUser", "ApplicationUser")
+                        .WithMany("Rakings")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("Shows4.App.Data.Entities.Serie", "Serie")
+                        .WithMany("Rakings")
+                        .HasForeignKey("SerieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Serie");
+                });
+
+            modelBuilder.Entity("Shows4.App.Data.Entities.RentDetail", b =>
+                {
+                    b.HasOne("Shows4.App.Data.Entities.ApplicationUser", "ApplicationUser")
+                        .WithMany("RentDetails")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("Shows4.App.Data.Entities.Serie", "Serie")
+                        .WithMany()
+                        .HasForeignKey("SerieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Serie");
+                });
+
             modelBuilder.Entity("Shows4.App.Data.Entities.Season", b =>
                 {
                     b.HasOne("Shows4.App.Data.Entities.Episode", "Episode")
@@ -489,6 +648,10 @@ namespace Shows4.App.Data.Migrations
                         .HasForeignKey("EpisodeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Shows4.App.Data.Entities.Serie", null)
+                        .WithMany("Seasons")
+                        .HasForeignKey("SerieId");
 
                     b.Navigation("Episode");
                 });
@@ -529,6 +692,25 @@ namespace Shows4.App.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("Shows4.App.Data.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Rakings");
+
+                    b.Navigation("RentDetails");
+                });
+
+            modelBuilder.Entity("Shows4.App.Data.Entities.Season", b =>
+                {
+                    b.Navigation("Episodes");
+                });
+
+            modelBuilder.Entity("Shows4.App.Data.Entities.Serie", b =>
+                {
+                    b.Navigation("Rakings");
+
+                    b.Navigation("Seasons");
                 });
 #pragma warning restore 612, 618
         }

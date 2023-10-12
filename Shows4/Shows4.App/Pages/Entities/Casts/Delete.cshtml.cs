@@ -1,52 +1,45 @@
-﻿namespace Shows4.App.Pages.Entities.Casts;
+﻿using Shows4.App.Repositories;
+
+namespace Shows4.App.Pages.Entities.Casts;
 [Authorize]
 
 public class DeleteModel : PageModel
 {
-    private readonly Shows4.App.Data.ApplicationDbContext _context;
+    private readonly CastRepository _castRepository;
+    
 
-    public DeleteModel(Shows4.App.Data.ApplicationDbContext context)
+    public DeleteModel(CastRepository castRepository)
     {
-        _context = context;
+
+        _castRepository = castRepository;
     }
 
     [BindProperty]
   public Cast Cast { get; set; }
+    public IList<Cast> LCast { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id == null || _context.Casts == null)
+        Cast = await _castRepository.FindCastById(id);
+        var (cast, casts) = await _castRepository.GetCastAndListAsync(id);
+        if (Cast == null)
         {
             return NotFound();
         }
-
-        var cast = await _context.Casts.FirstOrDefaultAsync(m => m.Id == id);
-
-        if (cast == null)
-        {
-            return NotFound();
-        }
-        else 
-        {
-            Cast = cast;
-        }
+        LCast = casts; // Devolve o Pais que vai bucar pelo ID
         return Page();
     }
 
     public async Task<IActionResult> OnPostAsync(int? id)
     {
-        if (id == null || _context.Casts == null)
+        Cast = await _castRepository.FindCastById(id);
+
+        if (Cast == null)
         {
             return NotFound();
         }
-        var cast = await _context.Casts.FindAsync(id);
 
-        if (cast != null)
-        {
-            Cast = cast;
-            _context.Casts.Remove(Cast);
-            await _context.SaveChangesAsync();
-        }
+        await _castRepository.RemoveCast(Cast);
 
         return RedirectToPage("./Index");
     }

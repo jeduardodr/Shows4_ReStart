@@ -1,36 +1,36 @@
-﻿namespace Shows4.App.Pages.Entities.Casts;
+﻿using Shows4.App.Repositories;
+
+namespace Shows4.App.Pages.Entities.Casts;
 [Authorize]
 
 public class CreateModel : PageModel
 {
-    private readonly Shows4.App.Data.ApplicationDbContext _context;
+    private readonly CastRepository _castRepository;
+    
 
-    public CreateModel(Shows4.App.Data.ApplicationDbContext context)
+    public CreateModel(CastRepository castRepository)
     {
-        _context = context;
+       
+        _castRepository = castRepository;
     }
+
+    [BindProperty]  
+    public Cast Cast { get; set; }
 
     public IActionResult OnGet()
     {
-    ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name");
+        ViewData["CountryId"] = _castRepository.GetCountries();
         return Page();
     }
 
-    [BindProperty]
-    public Cast Cast { get; set; }
-    
-
-    // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
       if (!ModelState.IsValid)
         {
+            ViewData["CountryId"] = _castRepository.GetCountries();
             return Page();
         }
-
-        _context.Casts.Add(Cast);
-        await _context.SaveChangesAsync();
-
+      await _castRepository.AddCastAsync(Cast);
         return RedirectToPage("./Index");
     }
 }

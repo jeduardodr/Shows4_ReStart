@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Shows4.App.Data.Entities;
-
 namespace Shows4.App.Data;
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
@@ -12,8 +9,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Season> Seasons { get; set; }
     public DbSet<Writer> Writers { get; set; }
     public DbSet<Serie> Series { get; set; }
+    public DbSet<Raking> Rakings { get; set; }
+    public DbSet<RentDetail> RentDetails { get; set; }
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
     }
+   
 }

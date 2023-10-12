@@ -11,5 +11,6 @@ namespace Shows4.App.Data.Entities
         [MaxLength(30)]
 
         public string Name { get; set; }
+      
     }
 }

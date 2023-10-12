@@ -3,21 +3,17 @@
 
 public class IndexModel : PageModel
 {
-    private readonly Data.ApplicationDbContext _context;
+    private readonly CastRepository _castRepository;
 
-    public IndexModel(Data.ApplicationDbContext context)
+    public IndexModel(CastRepository castRepository)
     {
-        _context = context;
+      _castRepository = castRepository; 
     }
 
-    public IList<Cast> Cast { get;set; } = default!;
+    public IList<Cast> Cast { get; set; } = default!;
 
     public async Task OnGetAsync()
     {
-        if (_context.Casts != null)
-        {
-            Cast = await _context.Casts
-            .Include(c => c.Country).ToListAsync();
-        }
+        Cast = await _castRepository.GetCastAsync();
     }
 }

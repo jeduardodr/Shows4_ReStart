@@ -1,13 +1,17 @@
-﻿namespace Shows4.App.Pages.Entities.Casts;
+﻿using Shows4.App.Repositories;
+
+namespace Shows4.App.Pages.Entities.Casts;
 [Authorize]
 
 public class EditModel : PageModel
 {
+    private readonly CastRepository _castRepository;
     private readonly Shows4.App.Data.ApplicationDbContext _context;
 
-    public EditModel(Shows4.App.Data.ApplicationDbContext context)
+    public EditModel(CastRepository castRepository,Data.ApplicationDbContext context)
     {
         _context = context;
+        _castRepository = castRepository;   
     }
 
     [BindProperty]
@@ -15,39 +19,33 @@ public class EditModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id == null || _context.Casts == null)
+        if (id == null)
+        {
+            return NotFound();
+        }
+        Cast = await _castRepository.GetCastAsync(id.Value);
+        if (Cast == null)
         {
             return NotFound();
         }
 
-        var cast =  await _context.Casts.FirstOrDefaultAsync(m => m.Id == id);
-        if (cast == null)
-        {
-            return NotFound();
-        }
-        Cast = cast;
-       ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id");
+        ViewData["CountryId"] = _castRepository.GetCountries();
         return Page();
     }
-
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid)
         {
+            ViewData["CountryId"] = _castRepository.GetCountries();
             return Page();
         }
-
-        _context.Attach(Cast).State = EntityState.Modified;
-
         try
         {
-            await _context.SaveChangesAsync();
+            await _castRepository.UpdateCastAsync(Cast);
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!CastExists(Cast.Id))
+            if (!_castRepository.CastExists(Cast.Id))
             {
                 return NotFound();
             }
@@ -56,7 +54,6 @@ public class EditModel : PageModel
                 throw;
             }
         }
-
         return RedirectToPage("./Index");
     }
 

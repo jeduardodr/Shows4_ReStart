@@ -35,6 +35,16 @@
                 <span asp-validation-for="Serie.RatingGlobal" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Serie.Price" class="control-label"></label>
+                <input asp-for="Serie.Price" class="form-control" />
+                <span asp-validation-for="Serie.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Serie.Image" class="control-label"></label>
+                <input asp-for="Serie.Image" class="form-control" />
+                <span asp-validation-for="Serie.Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Serie.CountryId" class="control-label"></label>
                 <select asp-for="Serie.CountryId" class="form-control" asp-items="ViewBag.CountryId"></select>
                 <span asp-validation-for="Serie.CountryId" class="text-danger"></span>

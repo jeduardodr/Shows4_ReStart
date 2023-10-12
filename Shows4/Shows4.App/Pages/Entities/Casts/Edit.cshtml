@@ -26,7 +26,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="Cast.Gender" class="control-label"></label>
-                <input asp-for="Cast.Gender" class="form-control" />
+                <select asp-for="Cast.Gender" class="form-control">
+                    <option value="Prefiro não responder">Prefiro não responder</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Agenero">Agenero</option>
+                    <option value="Aliagenero">Aliagenero</option>
+                    <option value="Androgine">Androgine</option>
+                    <option value="Bigenero">Bigenero</option>
+                    <option value="Poligenro">Poligenro</option>
+                    <option value="Intergenero">Intergenero</option>
+                    <option value="Neutro">Neutro</option>
+                    <option value="Genderqueer">Genderqueer</option>
+                </select>
                 <span asp-validation-for="Cast.Gender" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -1,5 +1,8 @@
-﻿namespace Shows4.App.Pages.Entities.Writers;
-[Authorize(Roles = "Admin")]
+﻿using Microsoft.EntityFrameworkCore;
+using Shows4.App.Repositories;
+
+namespace Shows4.App.Pages.Entities.Writers;
+//[Authorize(Roles = "Admin")]
 
 public class CreateModel : PageModel
 {
@@ -23,6 +26,7 @@ public class CreateModel : PageModel
     {
         if (!ModelState.IsValid)
         {
+            ViewData["CountryId"] = _writerRepository.GetCountries();
             return Page();
         }
 

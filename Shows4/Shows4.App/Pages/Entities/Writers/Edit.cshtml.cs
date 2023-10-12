@@ -1,53 +1,44 @@
 ﻿namespace Shows4.App.Pages.Entities.Writers;
 [Authorize]
-
 public class EditModel : PageModel
 {
-    private readonly Data.ApplicationDbContext _context;
-
-    public EditModel(Data.ApplicationDbContext context)
+    private readonly WriterRepository _writerRepository;
+    
+    public EditModel(WriterRepository writerRepository)
     {
-        _context = context;
+        _writerRepository = writerRepository;
     }
-
     [BindProperty]
     public Writer Writer { get; set; } = default!;
-
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id == null || _context.Writers == null)
+        if (id == null)
         {
             return NotFound();
         }
-
-        var writer =  await _context.Writers.FirstOrDefaultAsync(m => m.Id == id);
-        if (writer == null)
+        Writer = await _writerRepository.GetWriterAsync(id.Value);
+        if (Writer == null)
         {
             return NotFound();
         }
-        Writer = writer;
-       ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name");
+      
+        ViewData["CountryId"] = _writerRepository.GetCountries();
         return Page();
     }
-
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid)
         {
+            ViewData["CountryId"] = _writerRepository.GetCountries();
             return Page();
         }
-
-        _context.Attach(Writer).State = EntityState.Modified;
-
         try
         {
-            await _context.SaveChangesAsync();
+            await _writerRepository.UpdateWriterAsync(Writer);
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!WriterExists(Writer.Id))
+            if (!_writerRepository.WriterExists(Writer.Id))
             {
                 return NotFound();
             }
@@ -56,12 +47,7 @@ public class EditModel : PageModel
                 throw;
             }
         }
-
         return RedirectToPage("./Index");
     }
-
-    private bool WriterExists(int id)
-    {
-      return _context.Writers.Any(e => e.Id == id);
-    }
+ 
 }
