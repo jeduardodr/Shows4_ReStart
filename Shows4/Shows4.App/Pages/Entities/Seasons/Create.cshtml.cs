@@ -1,46 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Shows4.App.Data;
-using Shows4.App.Data.Entities;
+﻿namespace Shows4.App.Pages.Entities.Seasons;
 
-namespace Shows4.App.Pages.Entities.Seasons
+public class CreateModel : PageModel
 {
-    public class CreateModel : PageModel
+    private readonly SeasonRepository _seasonRepository;
+
+    public CreateModel(SeasonRepository seasonRepository)
     {
-        private readonly Shows4.App.Data.ApplicationDbContext _context;
+        _seasonRepository = seasonRepository;
+    }
+    //Para receber o Id da Serie
+    [BindProperty(SupportsGet = true)]
+    public int Id { get; set; }
 
-        public CreateModel(Shows4.App.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    public IActionResult OnGet()
+    {
+        Season = new Season { SerieId = Id };
+        return Page();
+    }
 
-        public IActionResult OnGet()
+    [BindProperty]
+    public Season Season { get; set; }
+
+    // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+    public async Task<IActionResult> OnPostAsync(int? id)
+    {
+        if (!ModelState.IsValid)
         {
-        ViewData["EpisodeId"] = new SelectList(_context.Episodes, "Id", "Id");
             return Page();
         }
 
-        [BindProperty]
-        public Season Season { get; set; }
-        
-
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        // Defina o SerieId com base no Id passado como parâmetro
+        if (id.HasValue)
         {
-          if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Seasons.Add(Season);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            Season.SerieId = id.Value;
         }
+        else
+        {
+            return RedirectToPage("./Index", new { id = Season.SerieId });
+        }
+
+        await _seasonRepository.AddAsync(Season);
+        //Volta ao Index a partir do Id da Serie
+        return RedirectToPage("./Index", new { id = Season.SerieId });
     }
 }
+
+

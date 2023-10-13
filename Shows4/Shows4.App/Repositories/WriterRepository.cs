@@ -41,6 +41,7 @@ public class WriterRepository
     {
         return await _ctx.Countries.ToListAsync();
     }
+
     public async Task<IList<Writer>> GetWritersAsync()
     {
         if (_ctx.Writers != null)

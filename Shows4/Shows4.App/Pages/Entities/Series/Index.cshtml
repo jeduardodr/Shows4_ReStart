@@ -14,31 +14,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Serie[0].Title)
+                Title
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Serie[0].Description)
+               Description
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Serie[0].Rating)
+               Price
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Serie[0].RatingGlobal)
+               Image
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Serie[0].Price)
+               YearRelease
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Serie[0].Image)
+               Country
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Serie[0].Country)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Serie[0].Season)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Serie[0].Genre)
+               Genre
             </th>
             <th></th>
         </tr>
@@ -53,27 +47,27 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RatingGlobal)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Image)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Country.Id)
+                @Html.DisplayFor(modelItem => item.YearRelease)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Season.Id)
+                @Html.DisplayFor(modelItem => item.Country.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Genre.Id)
+                @Html.DisplayFor(modelItem => item.Genre.Name)
             </td>
             <td>
+
+                   
+
+
+                
+                <a asp-page="../Seasons/Index" asp-route-id="@item.Id"> Season Index</a>|
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>

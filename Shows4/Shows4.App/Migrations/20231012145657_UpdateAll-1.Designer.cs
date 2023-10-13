@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shows4.App.Data;
 
@@ -11,9 +12,11 @@ using Shows4.App.Data;
 namespace Shows4.App.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231012145657_UpdateAll-1")]
+    partial class UpdateAll1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -314,7 +317,7 @@ namespace Shows4.App.Data.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int>("SeasonId")
+                    b.Property<int?>("SeasonId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -422,12 +425,7 @@ namespace Shows4.App.Data.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int>("SerieId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SerieId");
 
                     b.ToTable("Seasons");
                 });
@@ -455,10 +453,13 @@ namespace Shows4.App.Data.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
 
-                    b.Property<string>("YearRelease")
+                    b.Property<double>("RatingGlobal")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -579,9 +580,7 @@ namespace Shows4.App.Data.Migrations
                 {
                     b.HasOne("Shows4.App.Data.Entities.Season", null)
                         .WithMany("Episodes")
-                        .HasForeignKey("SeasonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SeasonId");
                 });
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Raking", b =>
@@ -591,7 +590,7 @@ namespace Shows4.App.Data.Migrations
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Shows4.App.Data.Entities.Serie", "Serie")
-                        .WithMany("Rakings")
+                        .WithMany()
                         .HasForeignKey("SerieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -616,15 +615,6 @@ namespace Shows4.App.Data.Migrations
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Serie");
-                });
-
-            modelBuilder.Entity("Shows4.App.Data.Entities.Season", b =>
-                {
-                    b.HasOne("Shows4.App.Data.Entities.Serie", null)
-                        .WithMany("Seasons")
-                        .HasForeignKey("SerieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Serie", b =>
@@ -667,13 +657,6 @@ namespace Shows4.App.Data.Migrations
             modelBuilder.Entity("Shows4.App.Data.Entities.Season", b =>
                 {
                     b.Navigation("Episodes");
-                });
-
-            modelBuilder.Entity("Shows4.App.Data.Entities.Serie", b =>
-                {
-                    b.Navigation("Rakings");
-
-                    b.Navigation("Seasons");
                 });
 #pragma warning restore 612, 618
         }

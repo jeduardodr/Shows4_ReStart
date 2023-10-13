@@ -1,0 +1,37 @@
+﻿@page
+@model Shows4.App.Models.SeasonsModel
+
+@{
+    ViewData["Title"] = "Seasons";
+}
+
+<h1>Seasons</h1>
+
+<div>
+    
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Description</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var season in Model.Seasons)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(_ => season.Number)</td>
+                    <td>@Html.DisplayFor(_ => season.Description)</td>
+                  
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a asp-page="./Entities/Seasons/Edit" asp-route-id="@Model.Serie?.Id">Edit Season</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

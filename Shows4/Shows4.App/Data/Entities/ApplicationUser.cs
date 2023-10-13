@@ -10,5 +10,6 @@ namespace Shows4.App.Data.Entities
         public bool Administrator { get; set; }
         public List<Raking> Rakings { get; set; }  // lista de avaliações feitas pelo cliente 
         public List<RentDetail> RentDetails { get; set; }  // lista de alugueres feitos pelo cliente 
+        //Credit Card
     }
 }

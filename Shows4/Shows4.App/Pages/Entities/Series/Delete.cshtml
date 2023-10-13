@@ -13,58 +13,46 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Serie.Title)
+          Title
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Serie.Title)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Serie.Description)
+           Description
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Serie.Description)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Serie.Rating)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Serie.Rating)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Serie.RatingGlobal)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Serie.RatingGlobal)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Serie.Price)
+           Price
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Serie.Price)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Serie.Image)
+            Image
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Serie.Image)
+           Image
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Serie.Country)
+            Year Release
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Serie.Country.Id)
+            @Html.DisplayFor(model => model.Serie.YearRelease)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Serie.Season)
+           Country
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Serie.Season.Id)
+            @Html.DisplayFor(model => model.Serie.Country.Name)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Serie.Genre)
+           Genre
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Serie.Genre.Id)
+            @Html.DisplayFor(model => model.Serie.Genre.Name)
         </dd>
     </dl>
     

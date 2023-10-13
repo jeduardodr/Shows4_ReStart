@@ -23,6 +23,8 @@ builder.Services.AddScoped<CountryRepository>();
 builder.Services.AddScoped<WriterRepository>();
 builder.Services.AddScoped<GenresRepository>();
 builder.Services.AddScoped<CastRepository>();
+builder.Services.AddScoped<SerieRepository>();
+builder.Services.AddScoped<SeasonRepository>();
 
 
 

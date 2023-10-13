@@ -1,43 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Shows4.App.Data;
-using Shows4.App.Data.Entities;
+﻿namespace Shows4.App.Pages.Entities.Series;
+[Authorize]
 
-namespace Shows4.App.Pages.Entities.Series
+public class DetailsModel : PageModel
 {
-    public class DetailsModel : PageModel
+    private readonly SerieRepository _serieRepository;
+
+    public DetailsModel(SerieRepository serieRepository)
     {
-        private readonly Shows4.App.Data.ApplicationDbContext _context;
+        _serieRepository = serieRepository;
+    }
 
-        public DetailsModel(Shows4.App.Data.ApplicationDbContext context)
+    public Serie Serie { get; set; }
+    public IList<Serie> LSerie { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(int? id)
+    {
+        if (id == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-      public Serie Serie { get; set; }
+        var (serie, series) = await _serieRepository.GetSerieAndListAsync(id);
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        if (serie == null)
         {
-            if (id == null || _context.Series == null)
-            {
-                return NotFound();
-            }
-
-            var serie = await _context.Series.FirstOrDefaultAsync(m => m.Id == id);
-            if (serie == null)
-            {
-                return NotFound();
-            }
-            else 
-            {
-                Serie = serie;
-            }
-            return Page();
+            return NotFound();
         }
+
+        Serie = serie;
+        LSerie = series;
+
+        return Page();
     }
 }

@@ -25,16 +25,6 @@
                 <span asp-validation-for="Serie.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Serie.Rating" class="control-label"></label>
-                <input asp-for="Serie.Rating" class="form-control" />
-                <span asp-validation-for="Serie.Rating" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Serie.RatingGlobal" class="control-label"></label>
-                <input asp-for="Serie.RatingGlobal" class="form-control" />
-                <span asp-validation-for="Serie.RatingGlobal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Serie.Price" class="control-label"></label>
                 <input asp-for="Serie.Price" class="form-control" />
                 <span asp-validation-for="Serie.Price" class="text-danger"></span>
@@ -45,14 +35,14 @@
                 <span asp-validation-for="Serie.Image" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Serie.YearRelease" class="control-label"></label>
+                <input type="number" asp-for="Serie.YearRelease" class="form-control" />
+                <span asp-validation-for="Serie.YearRelease" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Serie.CountryId" class="control-label"></label>
                 <select asp-for="Serie.CountryId" class="form-control" asp-items="ViewBag.CountryId"></select>
                 <span asp-validation-for="Serie.CountryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Serie.SeasonId" class="control-label"></label>
-                <select asp-for="Serie.SeasonId" class="form-control" asp-items="ViewBag.SeasonId"></select>
-                <span asp-validation-for="Serie.SeasonId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Serie.GenreId" class="control-label"></label>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shows4.App.Data;
 
@@ -11,9 +12,11 @@ using Shows4.App.Data;
 namespace Shows4.App.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231012142632_RemoveFields")]
+    partial class RemoveFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -314,7 +317,13 @@ namespace Shows4.App.Data.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int>("SeasonId")
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
+
+                    b.Property<double>("RatingGlobal")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("SeasonId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -419,13 +428,24 @@ namespace Shows4.App.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EpisodeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int>("SerieId")
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
+
+                    b.Property<double>("RatingGlobal")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("SerieId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EpisodeId");
 
                     b.HasIndex("SerieId");
 
@@ -455,10 +475,16 @@ namespace Shows4.App.Data.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
 
-                    b.Property<string>("YearRelease")
+                    b.Property<double>("RatingGlobal")
+                        .HasColumnType("float");
+
+                    b.Property<int>("SeasonId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -466,6 +492,8 @@ namespace Shows4.App.Data.Migrations
                     b.HasIndex("CountryId");
 
                     b.HasIndex("GenreId");
+
+                    b.HasIndex("SeasonId");
 
                     b.ToTable("Series");
                 });
@@ -579,9 +607,7 @@ namespace Shows4.App.Data.Migrations
                 {
                     b.HasOne("Shows4.App.Data.Entities.Season", null)
                         .WithMany("Episodes")
-                        .HasForeignKey("SeasonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SeasonId");
                 });
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Raking", b =>
@@ -620,11 +646,17 @@ namespace Shows4.App.Data.Migrations
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Season", b =>
                 {
-                    b.HasOne("Shows4.App.Data.Entities.Serie", null)
-                        .WithMany("Seasons")
-                        .HasForeignKey("SerieId")
+                    b.HasOne("Shows4.App.Data.Entities.Episode", "Episode")
+                        .WithMany()
+                        .HasForeignKey("EpisodeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Shows4.App.Data.Entities.Serie", null)
+                        .WithMany("Seasons")
+                        .HasForeignKey("SerieId");
+
+                    b.Navigation("Episode");
                 });
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Serie", b =>
@@ -641,9 +673,17 @@ namespace Shows4.App.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Shows4.App.Data.Entities.Season", "Season")
+                        .WithMany()
+                        .HasForeignKey("SeasonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Country");
 
                     b.Navigation("Genre");
+
+                    b.Navigation("Season");
                 });
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Writer", b =>

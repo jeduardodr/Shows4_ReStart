@@ -1,80 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Shows4.App.Data;
-using Shows4.App.Data.Entities;
+﻿namespace Shows4.App.Pages.Entities.Series;
+[Authorize]
 
-namespace Shows4.App.Pages.Entities.Series
+public class EditModel : PageModel
 {
-    public class EditModel : PageModel
-    {
-        private readonly Shows4.App.Data.ApplicationDbContext _context;
+    private readonly SerieRepository _serieRepository;
 
-        public EditModel(Shows4.App.Data.ApplicationDbContext context)
+    public EditModel(SerieRepository serieRepository)
+    {
+        _serieRepository = serieRepository;
+    }
+
+    [BindProperty]
+    public Serie Serie { get; set; } = default!;
+    
+
+    public async Task<IActionResult> OnGetAsync(int? id)
+    {
+        if (id == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        [BindProperty]
-        public Serie Serie { get; set; } = default!;
+        var serie = await _serieRepository.GetSerieByIdAsync(id.Value);
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        if (serie == null)
         {
-            if (id == null || _context.Series == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
 
-            var serie =  await _context.Series.FirstOrDefaultAsync(m => m.Id == id);
-            if (serie == null)
-            {
-                return NotFound();
-            }
-            Serie = serie;
-           ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id");
-           ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "Id");
-           ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Id");
+        Serie = serie;
+        ViewData["CountryId"] = _serieRepository.GetCountries();
+        ViewData["GenreId"] = _serieRepository.GetGenres();
+
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
+        {
+            ViewData["CountryId"] = _serieRepository.GetCountries();
+            ViewData["GenreId"] = _serieRepository.GetGenres();
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        try
         {
-            if (!ModelState.IsValid)
+            await _serieRepository.UpdateSerieAsync(Serie);
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!_serieRepository.SerieExists(Serie.Id))
             {
-                return Page();
+                return NotFound();
             }
-
-            _context.Attach(Serie).State = EntityState.Modified;
-
-            try
+            else
             {
-                await _context.SaveChangesAsync();
+                throw;
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SerieExists(Serie.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
         }
 
-        private bool SerieExists(int id)
-        {
-          return _context.Series.Any(e => e.Id == id);
-        }
+        return RedirectToPage("./Index");
     }
 }

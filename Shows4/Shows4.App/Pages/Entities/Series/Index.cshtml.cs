@@ -1,24 +1,19 @@
 ﻿namespace Shows4.App.Pages.Entities.Series;
-
+[Authorize]
 public class IndexModel : PageModel
 {
-    private readonly Shows4.App.Data.ApplicationDbContext _context;
+    private readonly SerieRepository _serieRepository;
 
-    public IndexModel(Shows4.App.Data.ApplicationDbContext context)
+    public IndexModel(SerieRepository serieRepository)
     {
-        _context = context;
+        _serieRepository = serieRepository;
     }
 
-    public IList<Serie> Serie { get;set; } = default!;
+    public IList<Serie> Serie { get; set; } = default!;
 
     public async Task OnGetAsync()
     {
-        if (_context.Series != null)
-        {
-            Serie = await _context.Series
-            .Include(s => s.Country)
-            .Include(s => s.Genre)
-            .Include(s => s.Season).ToListAsync();
-        }
+
+        Serie = await _serieRepository.GetSeriesWithIncludes();
     }
 }

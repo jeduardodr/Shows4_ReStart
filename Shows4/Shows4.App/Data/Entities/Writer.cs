@@ -19,8 +19,5 @@ namespace Shows4.App.Data.Entities
         public int CountryId { get; set; }
         public virtual Country Country { get; set; }
 
-       
-
-        //Talvez criar um genero em DataBase masculino, femenino, etc
     }
 }

@@ -1,33 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Shows4.App.Data;
-using Shows4.App.Data.Entities;
-
-namespace Shows4.App.Pages.Entities.Seasons
+﻿namespace Shows4.App.Pages.Entities.Seasons;
+[Authorize]
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly SeasonRepository _seasonRepository;
+   
+
+    public IndexModel(SeasonRepository seasonRepository )
     {
-        private readonly Shows4.App.Data.ApplicationDbContext _context;
-
-        public IndexModel(Shows4.App.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        public IList<Season> Season { get;set; } = default!;
-
-        public async Task OnGetAsync()
-        {
-            if (_context.Seasons != null)
-            {
-                Season = await _context.Seasons
-                .Include(s => s.Episode).ToListAsync();
-            }
-        }
+       
+        _seasonRepository = seasonRepository;
     }
+    //Recebe o Id de Serie
+    [BindProperty(SupportsGet = true)]
+    public int Id { get; set; }
+    public Serie Serie { get; set; }
+
+    public IList<Season> Season { get;set; } = default!;
+
+    public async Task OnGetAsync()
+    {
+        Season = await _seasonRepository.GetSeasonsBySerieIdAsync(Id);
+        Serie = await _seasonRepository.GetSerieByIdAsync(Id);
+    }
+
+
 }

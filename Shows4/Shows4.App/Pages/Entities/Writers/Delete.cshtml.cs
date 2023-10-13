@@ -21,6 +21,7 @@ public class DeleteModel : PageModel
             return NotFound();
         }
         LWriter = writers; // Devolve o Pais que vai bucar pelo ID
+
         return Page();
     }
 

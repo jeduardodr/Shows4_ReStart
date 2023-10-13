@@ -1,78 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Shows4.App.Data;
-using Shows4.App.Data.Entities;
+﻿namespace Shows4.App.Pages.Entities.Seasons;
 
-namespace Shows4.App.Pages.Entities.Seasons
+public class EditModel : PageModel
 {
-    public class EditModel : PageModel
-    {
-        private readonly Shows4.App.Data.ApplicationDbContext _context;
+    private readonly SeasonRepository _seasonRepository;
+    
 
-        public EditModel(Shows4.App.Data.ApplicationDbContext context)
+    public EditModel(SeasonRepository seasonRepository)
+    {
+        _seasonRepository = seasonRepository;
+    }
+
+    [BindProperty]
+    public Season Season { get; set; } = default!;
+    [BindProperty(SupportsGet = true)]
+    public int SerieId { get; set; }
+    public async Task<IActionResult> OnGetAsync(int? id)
+    {
+        if (id == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        [BindProperty]
-        public Season Season { get; set; } = default!;
+        Season = await _seasonRepository.GetSeasonByIdAsync(id.Value);
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        if (Season == null)
         {
-            if (id == null || _context.Seasons == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
 
-            var season =  await _context.Seasons.FirstOrDefaultAsync(m => m.Id == id);
-            if (season == null)
-            {
-                return NotFound();
-            }
-            Season = season;
-           ViewData["EpisodeId"] = new SelectList(_context.Episodes, "Id", "Id");
+        return Page();
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see https://aka.ms/RazorPagesCRUD.
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
+        {
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        // Defina o SerieId que vem do Index
+        Season.SerieId = SerieId;
+
+        try
         {
-            if (!ModelState.IsValid)
+            await _seasonRepository.UpdateSeasonAsync(Season);
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!_seasonRepository.SeasonExists(Season.Id))
             {
-                return Page();
+                return NotFound();
             }
-
-            _context.Attach(Season).State = EntityState.Modified;
-
-            try
+            else
             {
-                await _context.SaveChangesAsync();
+                throw;
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SeasonExists(Season.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
         }
 
-        private bool SeasonExists(int id)
-        {
-          return _context.Seasons.Any(e => e.Id == id);
-        }
+        return RedirectToPage("./Index", new { id = Season.SerieId });
     }
 }

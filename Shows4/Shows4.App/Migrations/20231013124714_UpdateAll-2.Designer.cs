@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shows4.App.Data;
 
@@ -11,9 +12,11 @@ using Shows4.App.Data;
 namespace Shows4.App.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231013124714_UpdateAll-2")]
+    partial class UpdateAll2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -577,11 +580,13 @@ namespace Shows4.App.Data.Migrations
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Episode", b =>
                 {
-                    b.HasOne("Shows4.App.Data.Entities.Season", null)
+                    b.HasOne("Shows4.App.Data.Entities.Season", "Season")
                         .WithMany("Episodes")
                         .HasForeignKey("SeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Season");
                 });
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Raking", b =>
@@ -620,11 +625,13 @@ namespace Shows4.App.Data.Migrations
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Season", b =>
                 {
-                    b.HasOne("Shows4.App.Data.Entities.Serie", null)
+                    b.HasOne("Shows4.App.Data.Entities.Serie", "Serie")
                         .WithMany("Seasons")
                         .HasForeignKey("SerieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Serie");
                 });
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Serie", b =>
