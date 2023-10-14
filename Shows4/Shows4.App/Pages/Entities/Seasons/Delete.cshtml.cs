@@ -1,63 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Shows4.App.Data;
-using Shows4.App.Data.Entities;
+﻿namespace Shows4.App.Pages.Entities.Seasons;
+[Authorize]
 
-namespace Shows4.App.Pages.Entities.Seasons
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly SeasonRepository _seasonRepository;
+
+    public DeleteModel(SeasonRepository seasonRepository)
     {
-        private readonly Shows4.App.Data.ApplicationDbContext _context;
+        _seasonRepository = seasonRepository;
+    }
 
-        public DeleteModel(Shows4.App.Data.ApplicationDbContext context)
+    [BindProperty]
+    public Season Season { get; set; }
+    [BindProperty(SupportsGet = true)]
+    public int SerieId { get; set; }
+
+    public async Task<IActionResult> OnGetAsync(int? id)
+    {
+        Season = await _seasonRepository.GetSeason(id);
+
+        if (Season == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        [BindProperty]
-      public Season Season { get; set; }
+        return Page();
+    }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null || _context.Seasons == null)
-            {
-                return NotFound();
-            }
+    public async Task<IActionResult> OnPostAsync(int? id)
+    {
+        Season.SerieId = SerieId; // Armazene o SerieId antes de deletar
+        await _seasonRepository.DeleteSeason(id);
 
-            var season = await _context.Seasons.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (season == null)
-            {
-                return NotFound();
-            }
-            else 
-            {
-                Season = season;
-            }
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null || _context.Seasons == null)
-            {
-                return NotFound();
-            }
-            var season = await _context.Seasons.FindAsync(id);
-
-            if (season != null)
-            {
-                Season = season;
-                _context.Seasons.Remove(Season);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index", new { id = Season.SerieId });
     }
 }

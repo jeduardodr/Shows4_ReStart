@@ -62,5 +62,31 @@ public class SeasonRepository
     {
         return _ctx.Seasons.Any(e => e.Id == id);
     }
+    //delete
+    public async Task<Season> GetSeason(int? id)
+    {
+        if (id == null || _ctx.Seasons == null)
+        {
+            return null;
+        }
 
+        var season = await _ctx.Seasons.FirstOrDefaultAsync(m => m.Id == id);
+        return season;
+    }
+
+    public async Task DeleteSeason(int? id)
+    {
+        if (id == null || _ctx.Seasons == null)
+        {
+            return;
+        }
+
+        var season = await _ctx.Seasons.FindAsync(id);
+
+        if (season != null)
+        {
+            _ctx.Seasons.Remove(season);
+            await _ctx.SaveChangesAsync();
+        }
+    }
 }

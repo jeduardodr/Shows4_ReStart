@@ -8,9 +8,12 @@
 
 <h1>Season - @Model.Serie.Title</h1>
 
-<p>
-    <a asp-page="Create" asp-route-id="@Model.Serie.Id">Create New Season</a>
-</p>
+<div style="display: flex; justify-content: space-between;">
+    <a asp-page="Create" asp-route-id="@Model.Serie.Id" class="btn btn-primary">Create New Season</a>
+   
+    <a asp-page="../Series/Index" class="btn btn-secondary">Back to seasons</a>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -35,7 +38,7 @@
             <td>
                     <a asp-page="./Edit" asp-route-id="@item.Id" asp-route-serieId="@item.SerieId">Edit</a> |
                 
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-page="./Delete" asp-route-id="@item.Id" asp-route-serieId="@item.SerieId">Delete</a>
             </td>
         </tr>
 }

@@ -3,21 +3,68 @@
 		|_| - Classe Temporada, 
 		|_| - Classe Serie, 
 		|_| - Classe Episodio , 
-		|_| - Classe Detalhes Aluguer, (preço pago)
+					|_| - Classe Detalhes Aluguer, (preço pago)
 		|_| - Classe Atores
-		|_| - Classe Atores/Episodios
+					|_| - Classe Atores/Episodios
+		|_| -Paises
+		|_| -Generos		
+		|_| -Paises	
+		|_| -Raking
+
 -----___________________________________________
-|_| - Criar um Utilizador Admin que Controla Insert/Update/Delete
+|_| - 			ERROS ENCONTRADOS AO NAVEGAR
+		|_|  - Pagina Delete Writers ( VIsual)
+			Botao na pagina details ( criaçar season) nao funciona //Talvez eliminar
 -----___________________________________________
-|_| - Criar Repositorio Para todas as Classes
+|_| - 		Criar uma Pagina VAlidaçao de idade Elenco ( um ator Idade Minima 2 ANos e maxima 110)
+
+	Nota:
+		Nos EUA, não há essa restrição. Bebês recém-nascidos 
+		podem encarar o “luz, câmera e ação!”. Isso não quer 
+		dizer que cumpram a mesma carga horária dos demais atores. 
+		Na Califórnia, bebês com menos de 6 meses não podem passar 
+		mais de 20 minutos por dia gravando. Se tiver de 
+		6 meses a 2 anos, a permissão se estende para duas horas. 
+-----___________________________________________
+|_| - 		Criar uma Pagina VAlidaçao de idade Escritor( um ator Idade Minima 16 ANos e maxima 110)
+		
+		Exceto que escritor ja faleceu ( ai teria de abrir uma exceçao, alguma maneira de contornar )
+		Ou simplesmente porcurar quando a idade mais velha num ator conhecido que tenha participado num filme
+
 -----___________________________________________
 |_| - 
 
---------UTILIZADOR NORMAL
+			--------UTILIZADOR ADMIN
 
 -----___________________________________________
-|_| - Criar Pagina que Aparece as Series (nome, preço , Genero, Classificaçao, Foto) tipo wareztuga
 -----___________________________________________
+|_| - Criar Repositorio Para todas as Classes
+		|_| - Classe Temporada, 
+		|_| - Classe Serie, 
+		|_| - Classe Episodio , 
+						|_| - Classe Detalhes Aluguer, (preço pago)
+		|_| - Classe Atores
+		|_| - Classe Genero Series
+		|_| - Classe Realizadores
+		|_| - Classe Paises 
+		CLasse Raking
+										|_| - Classe Atores/Episodios
+-----___________________________________________
+-----___________________________________________
+-----___________________________________________
+-----___________________________________________
+|_| - 
+
+			--------UTILIZADOR NORMAL
+
+-----___________________________________________
+|_| - Utilizador Pode Atualizar o Cartao de Credito
+-----___________________________________________
+
+|_| - Criar Pagina que Aparece as Series (nome, preço , Genero, Classificaçao, Foto) tipo wareztuga
+		Pagina Detalhes serie so que para o utilizador e mais grafica
+-----___________________________________________
+		Filtros
 |_| - Ordenar pagina Serie
 	|_| - a) PRocurar Serie Por Nome
 	|_| - b) Apresentar Top Serie por Pais
@@ -25,26 +72,33 @@
 	|_| - d) Apresentar Top Serie por Classificaçao 				
 -----___________________________________________
 |_| - Criar Pagina Detalhe Serie (aparece
-					Temporadas
-					Preço
-					Classificaçao Global
-						Botao Para Adicionar Classificaçao (Classe Classificaçao/Utilizador)
+					|_| - a) Temporadas
+					|_| - b) Preço
+					|_| - c) Classificaçao Global
+							Botao Para Adicionar Classificaçao (Classe Classificaçao/Utilizador)
 -----___________________________________________
 |_| - Criar pagina Mostrar Historico de Series Alugadas 
 					Procurar da Base Dados Tabela Detalhes IdUtilizador e As Series que Alugou
 -----___________________________________________
+		Filtros
 |_| - Pagina Atores 
 	|_| -Procurar Nome Ator e apresentar as Episodios ou Serie que participa
 	|_| - Episodios onde aparece
 	|_| - Series onde aparece
+
 -----___________________________________________
-|_| - Utilizador Pode Atualizar o Cartao de Credito
+|_| - 		PAGINA DETALHES
+
+		|_| - Conseguir ver as series alugadas e respetiva data e preco pago
 -----___________________________________________
 |_| - Todas as Pagina Criadas tem de ter o  [Authorize] para estarem todas logadas
+
 -----___________________________________________
 |_| - Pagina de Estatisticas
-	|_| - Ver Avaliaçoes de Filmes/Series
-	|_| - Historico de filmes/serie Alugados 
+		|_| - Ver Avaliaçoes de Filmes/Series
+		|_| - Historico de filmes/serie Alugados 
+-----___________________________________________
+|_| - Criar um Utilizador Admin que Controla Insert/Update/Delete
 -----___________________________________________
 |_| - 
 -----___________________________________________
@@ -73,17 +127,9 @@
 	|_| - Ver Avaliaçoes de Filmes/Series
 	|_| - Historico de filmes/serie Alugados
 -----___________________________________________
+-----___________________________________________
+-----___________________________________________
 
---------------------------------------VERSAO UTILIZADOR
-|_| - Na pagina serie, 
-	|_| -  procurar por nome
------___________________________________________
-|_| - Conseguir ver as series alugadas e respetiva data
------___________________________________________
------___________________________________________
-|_| - pagina onde colocar o nome ATOR a aparece
-	|_| - Episodios onde aparece
-	|_| - Series onde aparece
 -----___________________________________________
 |_| - 
 -----___________________________________________
