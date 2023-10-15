@@ -123,5 +123,10 @@ public class SerieRepository
         _ctx.Attach(serie).State = EntityState.Modified;
         await _ctx.SaveChangesAsync();
     }
-
+    //Verificaçao para saber se a serie ja tem Temporadas
+    public bool HasRelatedRecords(int serieId)
+    {
+        var relatedRecords = _ctx.Seasons.Where(m => m.SerieId == serieId).ToList();
+        return relatedRecords.Count > 0;
+    }
 }

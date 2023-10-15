@@ -1,6 +1,4 @@
-﻿using Shows4.App.Repositories;
-
-namespace Shows4.App.Pages.Entities.Series;
+﻿namespace Shows4.App.Pages.Entities.Series;
 [Authorize]
 
 public class DeleteModel : PageModel

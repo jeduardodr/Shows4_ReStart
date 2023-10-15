@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-
 namespace Shows4.App.Pages
 {
     public class SeasonsModel : PageModel

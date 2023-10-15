@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Shows4.App.Data;
+﻿using Shows4.App.Data;
 
 namespace Shows4.App.Repositories;
 
@@ -88,5 +87,11 @@ public class SeasonRepository
             _ctx.Seasons.Remove(season);
             await _ctx.SaveChangesAsync();
         }
+    }
+    //Verificaçao para saber se a Temporada  Temporadas ja tem
+    public bool HasRelatedRecords(int seasonId)
+    {
+        var relatedRecords = _ctx.Episodes.Where(m => m.SeasonId == seasonId).ToList();
+        return relatedRecords.Count > 0;
     }
 }

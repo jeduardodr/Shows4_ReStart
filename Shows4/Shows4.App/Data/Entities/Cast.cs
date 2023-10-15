@@ -19,5 +19,6 @@ namespace Shows4.App.Data.Entities
         public int CountryId { get; set; }
         public virtual Country Country {  get; set; }
         public List<Episode> Episodes { get; set; } // lista de episódios em que o ator participa
+        public List<EpisodeCast> EpisodeCasts { get; set; }
     }
 }

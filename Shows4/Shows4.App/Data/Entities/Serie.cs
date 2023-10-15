@@ -1,4 +1,6 @@
-﻿namespace Shows4.App.Data.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Shows4.App.Data.Entities;
 public class Serie
 {
     public int Id { get; set; }
@@ -17,5 +19,7 @@ public class Serie
    // public Season Season { get; set; }// Removido por Migration RemoveField
     public int GenreId { get; set; }
     public Genre Genre { get; set; }
-   
+    [NotMapped] // Para evitar que o canDelete seja mapeado para a base de dados
+    public bool CanDelete { get; set; } // Para poder probir de elimnar um dado que contenha FK
+
 }

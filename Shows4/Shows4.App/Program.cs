@@ -1,7 +1,4 @@
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Shows4.App.Data;
-using Shows4.App.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +22,7 @@ builder.Services.AddScoped<GenresRepository>();
 builder.Services.AddScoped<CastRepository>();
 builder.Services.AddScoped<SerieRepository>();
 builder.Services.AddScoped<SeasonRepository>();
+builder.Services.AddScoped<EpisodeRepository>();
 
 
 

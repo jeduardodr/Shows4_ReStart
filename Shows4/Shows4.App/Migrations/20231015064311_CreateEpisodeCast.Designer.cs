@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shows4.App.Data;
 
@@ -11,9 +12,11 @@ using Shows4.App.Data;
 namespace Shows4.App.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231015064311_CreateEpisodeCast")]
+    partial class CreateEpisodeCast
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,21 +119,24 @@ namespace Shows4.App.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderKey")
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
@@ -322,21 +328,6 @@ namespace Shows4.App.Data.Migrations
                     b.HasIndex("SeasonId");
 
                     b.ToTable("Episodes");
-                });
-
-            modelBuilder.Entity("Shows4.App.Data.Entities.EpisodeCast", b =>
-                {
-                    b.Property<int>("EpisodeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CastId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EpisodeId", "CastId");
-
-                    b.HasIndex("CastId");
-
-                    b.ToTable("EpisodeCast");
                 });
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Genre", b =>
@@ -596,25 +587,6 @@ namespace Shows4.App.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shows4.App.Data.Entities.EpisodeCast", b =>
-                {
-                    b.HasOne("Shows4.App.Data.Entities.Cast", "Cast")
-                        .WithMany("EpisodeCasts")
-                        .HasForeignKey("CastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Shows4.App.Data.Entities.Episode", "Episode")
-                        .WithMany("EpisodeCasts")
-                        .HasForeignKey("EpisodeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cast");
-
-                    b.Navigation("Episode");
-                });
-
             modelBuilder.Entity("Shows4.App.Data.Entities.Raking", b =>
                 {
                     b.HasOne("Shows4.App.Data.Entities.ApplicationUser", "ApplicationUser")
@@ -693,16 +665,6 @@ namespace Shows4.App.Data.Migrations
                     b.Navigation("Rakings");
 
                     b.Navigation("RentDetails");
-                });
-
-            modelBuilder.Entity("Shows4.App.Data.Entities.Cast", b =>
-                {
-                    b.Navigation("EpisodeCasts");
-                });
-
-            modelBuilder.Entity("Shows4.App.Data.Entities.Episode", b =>
-                {
-                    b.Navigation("EpisodeCasts");
                 });
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Season", b =>

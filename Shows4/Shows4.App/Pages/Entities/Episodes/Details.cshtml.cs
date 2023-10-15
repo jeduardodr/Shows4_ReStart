@@ -1,6 +1,6 @@
-﻿namespace Shows4.App.Pages.Entities.Seasons;
+﻿namespace Shows4.App.Pages.Entities.Episodes;
 [Authorize]
-//Nao Utilizo este codigo no projeto 
+
 public class DetailsModel : PageModel
 {
     private readonly Shows4.App.Data.ApplicationDbContext _context;
@@ -10,23 +10,23 @@ public class DetailsModel : PageModel
         _context = context;
     }
 
-  public Season Season { get; set; }
+  public Episode Episode { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id == null || _context.Seasons == null)
+        if (id == null || _context.Episodes == null)
         {
             return NotFound();
         }
 
-        var season = await _context.Seasons.FirstOrDefaultAsync(m => m.Id == id);
-        if (season == null)
+        var episode = await _context.Episodes.FirstOrDefaultAsync(m => m.Id == id);
+        if (episode == null)
         {
             return NotFound();
         }
         else 
         {
-            Season = season;
+            Episode = episode;
         }
         return Page();
     }
