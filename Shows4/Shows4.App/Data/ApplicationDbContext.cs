@@ -20,7 +20,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<EpisodeCast>()
             .HasKey(ec => new { ec.EpisodeId, ec.CastId });
 
@@ -37,6 +37,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
         modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(x => x.UserId);
     }
-    public DbSet<Shows4.App.Data.Entities.EpisodeCast> EpisodeCast { get; set; }
+    
 
 }

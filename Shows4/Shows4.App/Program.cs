@@ -8,14 +8,20 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+        .AddRoles<IdentityRole>() 
+        .AddEntityFrameworkStores<ApplicationDbContext>();
+       
 builder.Services.AddRazorPages();
+// Adicionar applicationUser Manager para adicionar cartao credito
+
+builder.Services.AddScoped<ApplicationUserManager, ApplicationUserManager>();
+builder.Services.AddControllersWithViews();
+// .AddRoles<IdentityRole>()
 
 
-
-// Configuração de serviços criados 
+// Configuraï¿½ï¿½o de serviï¿½os criados 
 builder.Services.AddScoped<CountryRepository>();
 builder.Services.AddScoped<WriterRepository>();
 builder.Services.AddScoped<GenresRepository>();
@@ -23,6 +29,7 @@ builder.Services.AddScoped<CastRepository>();
 builder.Services.AddScoped<SerieRepository>();
 builder.Services.AddScoped<SeasonRepository>();
 builder.Services.AddScoped<EpisodeRepository>();
+builder.Services.AddScoped<UserApplicationRepository>();
 
 
 
