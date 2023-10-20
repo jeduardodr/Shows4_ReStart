@@ -43,6 +43,13 @@ public class SerieRepository
         }
         return new List<Serie>();
     }
+    //Index pasta User
+    public IQueryable<Serie> GetSeriesWithIncludesUser()
+    {
+        return _ctx.Series
+            .Include(s => s.Country)
+            .Include(s => s.Genre);
+    }
     //create
     public async Task AddSerieAsync(Serie serie)
     {

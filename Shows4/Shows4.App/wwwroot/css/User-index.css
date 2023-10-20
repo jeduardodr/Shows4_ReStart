@@ -1,0 +1,31 @@
+﻿.series {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+   
+.serie-card {
+    flex-basis: 20%;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+/*.serie-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+    */
+.serie-image img {
+    width: 100%;
+}
+
+.serie-info {
+    padding: 10px;
+}
+
+    .serie-info h4 {
+        text-align: center; 
+    }
+.price {
+    text-align: left; 
+    
+}

@@ -6,7 +6,8 @@
     <title>@ViewData["Title"] - Shows4.App</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   
+    <link rel="stylesheet" href="~/css/user-index.css" />
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Shows4.App.styles.css" asp-append-version="true" />
  
@@ -50,6 +51,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Entities/Series/Index">Serie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/User/Index">UserView</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />

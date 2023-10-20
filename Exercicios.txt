@@ -1,15 +1,15 @@
 -----___________________________________________
 |_| - 1- Tem de ter 
-		|_| - Classe Temporada, 
-		|_| - Classe Serie, 
-		|_| - Classe Episodio , 
+		|V| - Classe Temporada, 
+		|V| - Classe Serie, 
+		|V| - Classe Episodio , 
 					|_| - Classe Detalhes Aluguer, (preço pago)
-		|_| - Classe Atores
+		|V| - Classe Atores
 					|_| - Classe Atores/Episodios
-		|_| -Paises
-		|_| -Generos		
-		|_| -Paises	
-		|_| -Raking
+		|V| -Paises
+		|V| -Generos		
+			
+		|_| -Raking		Composto por serie e pelo utilizador
 
 -----___________________________________________
 |_| - 			ERROS ENCONTRADOS AO NAVEGAR
@@ -39,16 +39,16 @@
 -----___________________________________________
 -----___________________________________________
 |_| - Criar Repositorio Para todas as Classes
-		|_| - Classe Temporada, 
-		|_| - Classe Serie, 
-		|_| - Classe Episodio , 
+		|V| - Classe Temporada, 
+		|V| - Classe Serie, 
+		|V| - Classe Episodio , 
 						|_| - Classe Detalhes Aluguer, (preço pago)
-		|_| - Classe Atores
-		|_| - Classe Genero Series
-		|_| - Classe Realizadores
-		|_| - Classe Paises 
-		CLasse Raking
-										|_| - Classe Atores/Episodios
+		|V| - Classe Atores
+		|V| - Classe Genero Series
+		|V| - Classe Realizadores
+		|V| - Classe Paises 
+						CLasse Raking
+								|_| - Classe Atores/Episodios
 -----___________________________________________
 -----___________________________________________
 -----___________________________________________
@@ -58,7 +58,7 @@
 			--------UTILIZADOR NORMAL
 
 -----___________________________________________
-|_| - Utilizador Pode Atualizar o Cartao de Credito
+|V| - Utilizador Pode Atualizar o Cartao de Credito
 -----___________________________________________
 
 |_| - Criar Pagina que Aparece as Series (nome, preço , Genero, Classificaçao, Foto) tipo wareztuga
