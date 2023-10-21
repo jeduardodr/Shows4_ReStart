@@ -1,4 +1,5 @@
 ﻿namespace Shows4.App.Pages.Entities.Seasons;
+[Authorize(Roles = "Admin")]
 
 public class EditModel : PageModel
 {

@@ -1,5 +1,5 @@
 ﻿namespace Shows4.App.Pages.Entities.Genres;
-[Authorize]
+[Authorize(Roles = "Admin")]
 
 public class CreateModel : PageModel
 {

@@ -1,7 +1,5 @@
-﻿using Shows4.App.Repositories;
-
-namespace Shows4.App.Pages.Entities.Casts;
-[Authorize]
+﻿namespace Shows4.App.Pages.Entities.Casts;
+[Authorize(Roles = "Admin")]
 
 public class EditModel : PageModel
 {

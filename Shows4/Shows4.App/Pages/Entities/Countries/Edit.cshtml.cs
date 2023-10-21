@@ -1,5 +1,5 @@
 ﻿namespace Shows4.App.Pages.Entities.Countries;
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class EditModel : PageModel
 {
     private readonly CountryRepository _countryRepository;

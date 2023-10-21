@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Shows4.App.Pages.Entities.Series;
-[Authorize]
+﻿namespace Shows4.App.Pages.Entities.Series;
+[Authorize(Roles = "Admin")]
 public class IndexModel : PageModel
 {
     private readonly SerieRepository _serieRepository;

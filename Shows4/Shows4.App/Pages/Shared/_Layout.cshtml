@@ -6,11 +6,13 @@
     <title>@ViewData["Title"] - Shows4.App</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/css/user-index.css" />
+    <link rel="stylesheet" href="~/css/user_styles.css" />
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Shows4.App.styles.css" asp-append-version="true" />
- 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
  
 </head>
 @section Scripts {
@@ -37,21 +39,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark"  asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>                        
-                            <li class="nav-item">
-                            <a class="nav-link text-dark"  asp-area="" asp-page="/Entities/Countries/Index">Countries</a>
-                             </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Entities/Genres/Index">Genres</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Entities/Writers/Index">Writers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Entities/Casts/Index">Cast</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Entities/Series/Index">Serie</a>
-                        </li>
+                            
+                      
+                       
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/User/Index">UserView</a>
                         </li>
@@ -59,24 +49,23 @@
                     <partial name="_LoginPartial" />
                 </div>
             </div>
-            <!-- TESTE-->
-          
-            <!--TEste2-->
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Botão dropdown
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Alguma ação</a>
-                    <a class="dropdown-item" href="#">Outra ação</a>
-                    <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+            <!-- Opçoes de Adminstrador -->
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Menu Admin
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="/Entities/Series/Index">Series</a></li>
+                        <li><a class="dropdown-item" href="/Entities/Casts/Index">Elenco</a></li>
+                        <li><a class="dropdown-item" href="/Entities/Writers/Index">Realizadores</a></li>
+                        <li><a class="dropdown-item" href="/Entities/Genres/Index">Generos</a></li>
+                        <li><a class="dropdown-item" href="/Entities/Countries/Index">Paises</a></li>
+                    </ul>
                 </div>
-            </div>
-
-               
-
-            <!-- Teste-->
-
+            }
         </nav>
 
     </header>

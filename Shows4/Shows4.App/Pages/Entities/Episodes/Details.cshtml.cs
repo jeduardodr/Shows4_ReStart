@@ -1,6 +1,5 @@
 ﻿namespace Shows4.App.Pages.Entities.Episodes;
-[Authorize]
-
+[Authorize(Roles = "Admin")]
 public class DetailsModel : PageModel
 {
     private readonly Shows4.App.Data.ApplicationDbContext _context;

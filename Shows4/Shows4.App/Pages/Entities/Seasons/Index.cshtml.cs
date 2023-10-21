@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Shows4.App.Pages.Entities.Seasons;
-[Authorize]
+﻿namespace Shows4.App.Pages.Entities.Seasons;
+[Authorize(Roles = "Admin")]
 public class IndexModel : PageModel
 {
     private readonly SeasonRepository _seasonRepository;

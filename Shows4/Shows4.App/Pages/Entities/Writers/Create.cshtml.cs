@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Shows4.App.Repositories;
-
-namespace Shows4.App.Pages.Entities.Writers;
-//[Authorize(Roles = "Admin")]
+﻿namespace Shows4.App.Pages.Entities.Writers;
+[Authorize(Roles = "Admin")]
 
 public class CreateModel : PageModel
 {

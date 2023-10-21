@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Shows4.App.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +33,8 @@ builder.Services.AddScoped<EpisodeRepository>();
 builder.Services.AddScoped<UserApplicationRepository>();
 
 
-
+//Inicializar a criaçao de Role administrador como o user administrador
+builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
 
 var app = builder.Build();
 
@@ -52,9 +54,23 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+//Chamar a criaçao do user admin
+await CreatePerfilUserAsync(app);
 
 app.UseAuthorization();
 
 app.MapRazorPages();
 
 app.Run();
+//Invocar os metodos 
+
+async Task CreatePerfilUserAsync(WebApplication app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+    using (var scope = scopedFactory.CreateScope()) 
+    {
+        var service = scope.ServiceProvider.GetService<ISeedUserRoleInitial>();
+        await service.SeedRolesAsync();
+        await service.SeedUserAsync();
+    }
+}

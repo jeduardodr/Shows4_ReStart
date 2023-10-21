@@ -1,5 +1,5 @@
 ﻿namespace Shows4.App.Pages.Entities.Seasons;
-[Authorize]
+[Authorize(Roles = "Admin")]
 
 public class DeleteModel : PageModel
 {

@@ -13,8 +13,7 @@
 
 -----___________________________________________
 |_| - 			ERROS ENCONTRADOS AO NAVEGAR
-		|_|  - Pagina Delete Writers ( VIsual)
-			Botao na pagina details ( criaçar season) nao funciona //Talvez eliminar
+		OUTRAS PAGINA DE NOTAS
 -----___________________________________________
 |_| - 		Criar uma Pagina VAlidaçao de idade Elenco ( um ator Idade Minima 2 ANos e maxima 110)
 
@@ -61,21 +60,26 @@
 |V| - Utilizador Pode Atualizar o Cartao de Credito
 -----___________________________________________
 
-|_| - Criar Pagina que Aparece as Series (nome, preço , Genero, Classificaçao, Foto) tipo wareztuga
+|_| - Criar Pagina que Aparece as Series (nome, preço , Ano, Classificaçao, Foto) tipo wareztuga
 		Pagina Detalhes serie so que para o utilizador e mais grafica
 -----___________________________________________
 		Filtros
 |_| - Ordenar pagina Serie
 	|_| - a) PRocurar Serie Por Nome
-	|_| - b) Apresentar Top Serie por Pais
-	|_| - c) Apresentar Serie por Genero
-	|_| - d) Apresentar Top Serie por Classificaçao 				
+-----___________________________________________
+	|_| - Criar ums Pagina 
+		|_| - a) Apresentar Top Serie por Pais
+			Filtrar por Pais
+		|_| - b) Apresentar Serie por Genero
+			Filtrar por Genero
+		|_| - c) Apresentar Top Serie por Classificaçao 				
 -----___________________________________________
 |_| - Criar Pagina Detalhe Serie (aparece
 					|_| - a) Temporadas
 					|_| - b) Preço
 					|_| - c) Classificaçao Global
 							Botao Para Adicionar Classificaçao (Classe Classificaçao/Utilizador)
+							Botao para alugar
 -----___________________________________________
 |_| - Criar pagina Mostrar Historico de Series Alugadas 
 					Procurar da Base Dados Tabela Detalhes IdUtilizador e As Series que Alugou

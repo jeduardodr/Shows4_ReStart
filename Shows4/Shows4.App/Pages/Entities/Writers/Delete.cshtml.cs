@@ -1,5 +1,5 @@
 ﻿namespace Shows4.App.Pages.Entities.Writers;
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class DeleteModel : PageModel
 {
     private readonly WriterRepository _writerRepository;

@@ -1,0 +1,10 @@
+MARCAR COM |X| QUANDO RESOLVIDO
+
+|_| - Proibir eliminar pais se o pais estiver a ser utilizador
+|_| - Proibir eliminar realizador se o realizador estiver a ser utilizado
+|_| - Proibir eliminar generos de series se elas estiverem a ser utilizadas
+		|_|  - Pagina Delete Writers ( VIsual)
+			Botao na pagina details ( criaçar season) nao funciona //Talvez eliminar
+IMPORTANTE:
+	
+Analisar o resto do codigo a procura de mais erros 

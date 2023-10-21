@@ -1,5 +1,5 @@
 ﻿namespace Shows4.App.Pages.Entities.Seasons;
-
+[Authorize(Roles = "Admin")]
 public class CreateModel : PageModel
 {
     private readonly SeasonRepository _seasonRepository;

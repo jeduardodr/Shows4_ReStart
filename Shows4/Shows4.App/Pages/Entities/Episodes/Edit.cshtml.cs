@@ -1,6 +1,5 @@
 ﻿namespace Shows4.App.Pages.Entities.Episodes;
-[Authorize]
-
+[Authorize(Roles = "Admin")]
 public class EditModel : PageModel
 {
     private readonly EpisodeRepository _episodeRepository;

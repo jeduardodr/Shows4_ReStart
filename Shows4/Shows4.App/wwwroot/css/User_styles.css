@@ -29,3 +29,7 @@
     text-align: left; 
     
 }
+.navpagination {
+    display: flex;
+    justify-content: center;
+}

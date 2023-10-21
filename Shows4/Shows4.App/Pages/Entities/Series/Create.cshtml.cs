@@ -1,6 +1,5 @@
 ﻿namespace Shows4.App.Pages.Entities.Series;
-[Authorize]
-
+[Authorize(Roles = "Admin")]
 public class CreateModel : PageModel
 {
     private readonly SerieRepository _serieRepository;

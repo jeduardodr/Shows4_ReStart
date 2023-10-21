@@ -1,5 +1,5 @@
 ﻿namespace Shows4.App.Pages.Entities.Seasons;
-[Authorize]
+[Authorize(Roles = "Admin")]
 //Nao Utilizo este codigo no projeto 
 public class DetailsModel : PageModel
 {

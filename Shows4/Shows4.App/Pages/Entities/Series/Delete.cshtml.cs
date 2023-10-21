@@ -1,5 +1,5 @@
 ﻿namespace Shows4.App.Pages.Entities.Series;
-[Authorize]
+[Authorize(Roles = "Admin")]
 
 public class DeleteModel : PageModel
 {
