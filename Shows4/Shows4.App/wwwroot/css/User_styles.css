@@ -20,6 +20,12 @@
 
 .serie-info {
     padding: 10px;
+   
+}
+a .serie-info {
+    padding: 10px;
+    text-decoration: none;
+    color: black;
 }
 
     .serie-info h4 {
@@ -27,8 +33,10 @@
     }
 .serie-info2 {
     display: flex;
-    align-items:flex-end;
+    align-items: flex-end;
     justify-content: space-between;
+    text-decoration: none;
+    color: black;
 }
 
 .navpagination {
@@ -36,3 +44,11 @@
     justify-content: center;
     
 }
+.linkseries{
+    text-decoration:none;
+    color: black;
+}
+    .linkseries:hover {
+        text-decoration: none;
+        color: black;
+    }

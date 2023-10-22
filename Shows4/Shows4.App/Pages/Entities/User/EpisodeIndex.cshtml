@@ -1,0 +1,36 @@
+﻿@page 
+@model Shows4.App.Pages.User.EpisodeIndexModel
+
+@{
+    ViewData["Title"] = "Episode";
+}
+
+<h1>Index</h1>
+
+<div style="display: flex; justify-content: space-between;">
+    <a asp-page="./PageSeason" asp-route-id="@Model.Season.SerieId" class="btn btn-secondary">Back to seasons</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th> Number Episode</th>
+            <th>Title Episode</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Episode) {
+        <tr>
+            <td> @Html.DisplayFor(modelItem => item.Number)</td>
+            <td> @Html.DisplayFor(modelItem => item.Title)</td>
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>
+                    <!--ELENCO-->
+                    <a asp-page="#" asp-route-id="@item.Id" asp-route-serieId="@item.SeasonId">Elenco</a> |
+                    
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

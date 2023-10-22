@@ -1,5 +1,5 @@
-﻿namespace Shows4.App.Pages.User;
-[Authorize(Roles = "Admin")]
+﻿namespace Shows4.App.Pages.Entities.Seasons;
+[Authorize]
 public class SeasonIndexModel : PageModel
 {
     private readonly SeasonRepository _seasonRepository;
@@ -8,7 +8,7 @@ public class SeasonIndexModel : PageModel
 
     public SeasonIndexModel(SeasonRepository seasonRepository, ApplicationDbContext context)
     {
-       
+
         _seasonRepository = seasonRepository;
         _context = context;
     }
@@ -17,7 +17,7 @@ public class SeasonIndexModel : PageModel
     public int Id { get; set; }
     public Serie Serie { get; set; }
 
-    public IList<Season> Season { get;set; } = default!;
+    public IList<Season> Season { get; set; } = default!;
 
     public async Task OnGetAsync()
     {

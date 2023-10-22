@@ -1,5 +1,5 @@
 ﻿namespace Shows4.App.Pages.User;
-[Authorize(Roles = "Admin")]
+[Authorize]
 public class EpisodeIndexModel : PageModel
 {
     private readonly EpisodeRepository _episodeRepository;

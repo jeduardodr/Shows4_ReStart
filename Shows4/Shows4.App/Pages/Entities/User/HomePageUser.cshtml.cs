@@ -1,4 +1,4 @@
-﻿namespace Shows4.App.Pages.User;
+﻿namespace Shows4.App.Pages.Entities.User;
 
 [Authorize]
 public class SerieIndexModel : PageModel
@@ -14,8 +14,11 @@ public class SerieIndexModel : PageModel
     }
 
     public IList<Serie> Serie { get; set; } = default!;
+    public IList<Serie> Series { get; set; } = default!;
     public int CurrentPage { get; set; }
     public int TotalPages { get; set; }
+    public string Filter { get; set; }
+    public string Test { get; set; }
 
     public async Task OnGetAsync(int currentPage = 1)
     {
@@ -29,6 +32,20 @@ public class SerieIndexModel : PageModel
             .Take(ItemsPerPage)
             .ToListAsync();
 
+        Series = (from series in _context.Series
+                           // where country.Name.StartsWith("p")
+                       select series).ToList();
 
+    }
+    public void OnPost()
+    {
+
+        var test = Test;
+
+        Series = (from series in _context.Series
+                  where series.Title.Contains(Filter)
+                       select series).ToList();
+
+      
     }
 }
