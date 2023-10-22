@@ -1,13 +1,13 @@
 ﻿namespace Shows4.App.Pages.User;
 
 [Authorize]
-public class IndexModel : PageModel
+public class SerieIndexModel : PageModel
 {
     private readonly SerieRepository _serieRepository;
     private readonly ApplicationDbContext _context;
     private const int ItemsPerPage = 8;
 
-    public IndexModel(SerieRepository serieRepository, ApplicationDbContext context)
+    public SerieIndexModel(SerieRepository serieRepository, ApplicationDbContext context)
     {
         _serieRepository = serieRepository;
         _context = context;

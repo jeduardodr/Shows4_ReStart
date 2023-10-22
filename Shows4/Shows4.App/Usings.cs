@@ -6,3 +6,6 @@ global using Shows4.App.Repositories;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Mvc.Rendering;
 global using Shows4.App.Data;
+global using System.ComponentModel.DataAnnotations;
+global using System.ComponentModel.DataAnnotations.Schema;
+global using Shows4.App.Models;

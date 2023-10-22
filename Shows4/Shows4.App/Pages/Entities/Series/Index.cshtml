@@ -13,70 +13,37 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                Title
-            </th>
-            <th>
-               Description
-            </th>
-            <th>
-               Price
-            </th>
-            <th>
-               Image
-            </th>
-            <th>
-               YearRelease
-            </th>
-            <th>
-               Country
-            </th>
-            <th>
-               Genre
-            </th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>YearRelease</th>
+            <th>Country</th>
+            <th>Genre</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Serie) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YearRelease)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre.Name)
-            </td>
-            <td>
-
-                   
-
-
-                
-                <a asp-page="../Seasons/Index" asp-route-id="@item.Id"> Season Index</a>|
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    @if (@item.CanDelete)
-                    {
-                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                    }
-                   
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Serie) 
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>@Html.DisplayFor(modelItem => item.Image)</td>
+                <td>@Html.DisplayFor(modelItem => item.YearRelease)</td>
+                <td>@Html.DisplayFor(modelItem => item.Country.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Genre.Name)</td>
+                <td>
+                    <a asp-page="../Seasons/Index" asp-route-id="@item.Id"> Season Index</a>|
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        @if (@item.CanDelete)
+                        {
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        } 
+                </td>
+             </tr>
+        }
     </tbody>
 </table>

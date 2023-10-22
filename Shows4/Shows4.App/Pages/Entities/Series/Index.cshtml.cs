@@ -5,7 +5,8 @@ public class IndexModel : PageModel
     private readonly SerieRepository _serieRepository;
     private readonly ApplicationDbContext _context;
 
-    public IndexModel(SerieRepository serieRepository, ApplicationDbContext context)
+    public IndexModel(SerieRepository serieRepository
+        , ApplicationDbContext context)
     {
         _serieRepository = serieRepository;
         _context = context;

@@ -25,11 +25,14 @@
     .serie-info h4 {
         text-align: center; 
     }
-.price {
-    text-align: left; 
-    
+.serie-info2 {
+    display: flex;
+    align-items:flex-end;
+    justify-content: space-between;
 }
+
 .navpagination {
     display: flex;
     justify-content: center;
+    
 }

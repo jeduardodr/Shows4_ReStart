@@ -1432,10 +1432,14 @@
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
 }
-
+.bg-creme {
+    --bs-bg-opacity: 1;
+    background-color: #FAF5E2;
+}
+#FAF5E2
 .bg-body {
-  --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-body-rgb), var(--bs-bg-opacity)) !important;
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-body-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-transparent {
