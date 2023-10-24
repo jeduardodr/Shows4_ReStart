@@ -6,5 +6,4 @@ public class CastModel
     public DateTime Birth { get; set; }
     public string CastGender { get; set; }
     public string CountryName { get; set; }
-    public List<Episode> CastEpisodes { get; set; }
 }

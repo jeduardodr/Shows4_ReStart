@@ -21,21 +21,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<EpisodeCast>()
-            .HasKey(ec => new { ec.EpisodeId, ec.CastId });
 
-        modelBuilder.Entity<EpisodeCast>()
-            .HasOne(ec => ec.Episode)
-            .WithMany(e => e.EpisodeCasts)
-            .HasForeignKey(ec => ec.EpisodeId);
-
-        modelBuilder.Entity<EpisodeCast>()
-            .HasOne(ec => ec.Cast)
-            .WithMany(c => c.EpisodeCasts)
-            .HasForeignKey(ec => ec.CastId);
-        base.OnModelCreating(modelBuilder);
-
-        modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(x => x.UserId);
     }
     
 

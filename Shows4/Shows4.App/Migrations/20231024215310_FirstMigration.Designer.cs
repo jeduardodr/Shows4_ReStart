@@ -9,11 +9,11 @@ using Shows4.App.Data;
 
 #nullable disable
 
-namespace Shows4.App.Data.Migrations
+namespace Shows4.App.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231015184938_UpdateUser3")]
-    partial class UpdateUser3
+    [Migration("20231024215310_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace Shows4.App.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CastEpisode", b =>
-                {
-                    b.Property<int>("CastsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EpisodesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CastsId", "EpisodesId");
-
-                    b.HasIndex("EpisodesId");
-
-                    b.ToTable("CastEpisode");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -119,21 +104,24 @@ namespace Shows4.App.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderKey")
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
@@ -330,21 +318,6 @@ namespace Shows4.App.Data.Migrations
                     b.ToTable("Episodes");
                 });
 
-            modelBuilder.Entity("Shows4.App.Data.Entities.EpisodeCast", b =>
-                {
-                    b.Property<int>("EpisodeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CastId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EpisodeId", "CastId");
-
-                    b.HasIndex("CastId");
-
-                    b.ToTable("EpisodeCast");
-                });
-
             modelBuilder.Entity("Shows4.App.Data.Entities.Genre", b =>
                 {
                     b.Property<int>("Id")
@@ -516,21 +489,6 @@ namespace Shows4.App.Data.Migrations
                     b.ToTable("Writers");
                 });
 
-            modelBuilder.Entity("CastEpisode", b =>
-                {
-                    b.HasOne("Shows4.App.Data.Entities.Cast", null)
-                        .WithMany()
-                        .HasForeignKey("CastsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Shows4.App.Data.Entities.Episode", null)
-                        .WithMany()
-                        .HasForeignKey("EpisodesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -600,25 +558,6 @@ namespace Shows4.App.Data.Migrations
                         .HasForeignKey("SeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Shows4.App.Data.Entities.EpisodeCast", b =>
-                {
-                    b.HasOne("Shows4.App.Data.Entities.Cast", "Cast")
-                        .WithMany("EpisodeCasts")
-                        .HasForeignKey("CastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Shows4.App.Data.Entities.Episode", "Episode")
-                        .WithMany("EpisodeCasts")
-                        .HasForeignKey("EpisodeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cast");
-
-                    b.Navigation("Episode");
                 });
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Raking", b =>
@@ -699,16 +638,6 @@ namespace Shows4.App.Data.Migrations
                     b.Navigation("Rakings");
 
                     b.Navigation("RentDetails");
-                });
-
-            modelBuilder.Entity("Shows4.App.Data.Entities.Cast", b =>
-                {
-                    b.Navigation("EpisodeCasts");
-                });
-
-            modelBuilder.Entity("Shows4.App.Data.Entities.Episode", b =>
-                {
-                    b.Navigation("EpisodeCasts");
                 });
 
             modelBuilder.Entity("Shows4.App.Data.Entities.Season", b =>

@@ -11,6 +11,5 @@ public class Episode
     [BindNever]
     public int SeasonId { get; set; } // chave estrangeira da temporada
     //public Season Season { get; set; } // referência à temporada
-    public List<Cast> Casts { get; set; }
-    public List<EpisodeCast> EpisodeCasts { get; set; }
+    
 }

@@ -14,8 +14,7 @@ public class Cast
     [ForeignKey("Country")]
     public int CountryId { get; set; }
     public virtual Country Country {  get; set; }
-    public List<Episode> Episodes { get; set; } // lista de episódios em que o ator participa
-    public List<EpisodeCast> EpisodeCasts { get; set; }
+   
     [NotMapped] // Para evitar que o canDelete seja mapeado para a base de dados
     public bool CanDelete { get; set; } // Para poder probir de elimnar um dado que contenha FK
 }
